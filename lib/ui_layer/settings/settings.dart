@@ -8,14 +8,21 @@ class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Settings"),
+        leading: Builder(
+            builder: (context) => IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.arrow_back))),
+      ),
       body: Container(
         padding: const EdgeInsets.all(10.0),
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: const Column(
-          children: [
-            AppTheme()
-          ],
+          children: [AppTheme()],
         ),
       ),
       bottomNavigationBar: const BottomNavigation(),

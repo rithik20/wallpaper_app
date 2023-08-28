@@ -13,6 +13,11 @@ void main(){
     ));
 
     expect(find.byType(Scaffold), findsOneWidget);//passed
+    expect(find.byType(AppBar), findsWidgets);//passed
+    expect(find.text("Settings"), findsWidgets);//passed
+    expect(find.byType(Builder), findsWidgets);//passed
+    expect(find.byType(IconButton), findsWidgets);//passed
+    expect(find.byIcon(Icons.arrow_back), findsWidgets);//passed
     expect(find.byType(Container), findsWidgets);//passed
     expect(find.byType(Column), findsWidgets);//passed
     expect(find.byType(AppTheme), findsOneWidget);//passed
