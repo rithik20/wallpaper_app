@@ -15,6 +15,10 @@ class DisplayImage extends StatelessWidget {
                 },
                 icon: const Icon(Icons.arrow_back))),
       ),
+
+      body: const Column(
+        children: [],
+      ),
     );
   }
 }

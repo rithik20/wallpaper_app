@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:free_wallpaper/business_logic_layer/app_style_provider/style.dart';
+import 'package:free_wallpaper/ui_layer/display_page/display_page.dart';
 import 'package:free_wallpaper/ui_layer/home_page/sample_images/sample_images.dart';
 import 'package:free_wallpaper/ui_layer/reusable_widgets/bottom_navigation/bottom_navigation_bar.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +33,10 @@ class HomePage extends StatelessWidget {
               decoration: InputDecoration(
                 hintText: "Type here to Search",
                 suffixIcon: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      ///navigate to the DisplayImage widget to show the images
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const DisplayImage()));
+                    },
                     icon: const Icon(
                       CupertinoIcons.search,
                       weight: 25.0,
