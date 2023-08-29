@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:free_wallpaper/ui_layer/full_screen/full_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../business_logic_layer/display_image/display_search_image.dart';
@@ -16,25 +17,32 @@ class DisplayImage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+
         ///getting the Search term from searchImage TextController from TextControllers dependency here
         title: Text(textControllers.searchImage.value.text.toUpperCase()),
         centerTitle: true,
         leading: Builder(
-            builder: (context) => IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.arrow_back))),
+            builder: (context) =>
+                IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.arrow_back))),
       ),
       body: SizedBox(
-        width: MediaQuery.of(context).size.width,
+        width: MediaQuery
+            .of(context)
+            .size
+            .width,
         child: Column(
           children: [
             Expanded(
+
               ///listing all images from the server in grid view mode here
               child: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
+
                   ///the DisplaySearchImageProvider has a searchedImageList list
                   ///this list holds all the images returned by the Data Layer
                   itemCount: images.searchedImageList.length,
@@ -44,6 +52,9 @@ class DisplayImage extends StatelessWidget {
                       child: InkWell(
                         onTap: () {
                           ///if the user tapped any image then show it in fullScreen
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) => FullScreen(
+                                  imageUrl: images.searchedImageList[index]['src']['large2x'])));
                         },
                         child: Image.network(
                           images.searchedImageList[index]['src']['medium'],
