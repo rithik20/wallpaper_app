@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:free_wallpaper/ui_layer/home_page/home_page.dart';
 import 'package:free_wallpaper/ui_layer/reusable_widgets/bottom_navigation/index_number_state_management.dart';
 import 'package:free_wallpaper/ui_layer/settings/settings.dart';
+import 'package:provider/provider.dart';
 
 class BottomNavigation extends StatelessWidget {
   const BottomNavigation({super.key});
@@ -10,7 +11,7 @@ class BottomNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final IndexNumber indexNumber = IndexNumber();
+    final indexNumber = Provider.of<IndexNumber>(context, listen: false);
 
     return BottomNavigationBar(
       items: const [

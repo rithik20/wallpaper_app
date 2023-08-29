@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:free_wallpaper/data_layer/display_image/search_image_api_model.dart';
 
 class SearchImageApiData {
+
   final Dio dio = Dio();
 
   Future<List<Map<String, dynamic>>> searchedImages(String query) async {
@@ -29,7 +30,7 @@ class SearchImageApiData {
 
         Map<String,dynamic> result = searchImageApi.toJson();
 
-        list.add(result);
+        list = result['photos'];
 
         return list;
       }else{
