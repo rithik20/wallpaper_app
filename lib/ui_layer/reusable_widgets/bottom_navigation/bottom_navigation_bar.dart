@@ -11,7 +11,7 @@ class BottomNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final indexNumber = Provider.of<IndexNumber>(context, listen: false);
+    final indexNumber = Provider.of<IndexNumber>(context);
 
     return BottomNavigationBar(
       items: const [

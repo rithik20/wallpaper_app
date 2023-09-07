@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:free_wallpaper/business_logic_layer/app_style_provider/style.dart';
-import 'package:free_wallpaper/business_logic_layer/display_image/display_search_image.dart';
 import 'package:free_wallpaper/business_logic_layer/text_controllers_provider/text_controllers.dart';
 import 'package:free_wallpaper/ui_layer/display_page/display_page.dart';
 import 'package:free_wallpaper/ui_layer/home_page/sample_images/sample_images.dart';
 import 'package:free_wallpaper/ui_layer/reusable_widgets/bottom_navigation/bottom_navigation_bar.dart';
 import 'package:provider/provider.dart';
+
+import '../../business_logic_layer/search_image/search_image_logic.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -16,7 +17,7 @@ class HomePage extends StatelessWidget {
     final textControllers = Provider.of<TextControllers>(context);
 
     final displayImage =
-        Provider.of<DisplaySearchImageProvider>(context, listen: false);
+        Provider.of<SearchedImageProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -42,15 +43,28 @@ class HomePage extends StatelessWidget {
                   hintText: "Type here to Search",
                   suffixIcon: IconButton(
                       onPressed: () async {
-                        await displayImage.getImagesFromSearchImageApiData(
-                            textControllers.searchImage.value.text);
+                        ///if the TextFormField is empty then show a SnackBar
+                        if (textControllers.searchImage.value.text.isEmpty) {
+                          const snackBar = SnackBar(
+                            content: Text("Please Enter Query To Search"),
+                            duration: Duration(seconds: 2),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
+                        ///if the TextFormField is not empty then call the API
+                        else {
+                          await displayImage.getImagesFromSearchImageApiData(
+                              textControllers.searchImage.value.text);
 
-                        if(!context.mounted) return;
-                        if (displayImage.searchedImageList.isNotEmpty) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const DisplayImage()));
+                          if (!context.mounted) return;
+                          if (displayImage.searchedImageList.isNotEmpty) {
+                            ///Navigate to the DisplayImage Widget
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const DisplayImage()));
+                          }
                         }
                       },
                       icon: const Icon(
