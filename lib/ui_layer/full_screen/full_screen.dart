@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:free_wallpaper/business_logic_layer/display_image/download_image/download_image.dart';
+import 'package:provider/provider.dart';
 
 class FullScreen extends StatelessWidget {
   final String imageUrl;
@@ -37,6 +39,8 @@ class FullScreen extends StatelessWidget {
           FloatingActionButton(
             onPressed: () {
               ///this button is for downloading the image to the user's device
+
+              Provider.of<ImageDownloader>(context, listen: false).downloadImage(imageUrl);
             },
             child: const Icon(CupertinoIcons.down_arrow),
           ),
