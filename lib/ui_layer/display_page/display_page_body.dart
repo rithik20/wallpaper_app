@@ -20,7 +20,7 @@ class DisplayImageBody extends StatelessWidget {
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
 
-                  ///the DisplaySearchImageProvider has a searchedImageList list
+                  ///the SearchedImageProvider has a searchedImageList list
                   ///this list holds all the images returned by the Data Layer
                   itemCount: image.searchedImageList.length,
                   itemBuilder: (context, index) {
