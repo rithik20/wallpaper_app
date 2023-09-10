@@ -2,5 +2,5 @@ import 'package:flutter/material.dart';
 
 class TextControllers{
 
-  TextEditingController searchImage = TextEditingController();
+  TextEditingController searchImageQuery = TextEditingController();
 }

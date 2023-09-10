@@ -18,14 +18,14 @@ class DisplayImage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         ///getting the Search term from searchImage TextController from TextControllers dependency here
-        title: Text(textControllers.searchImage.value.text.toUpperCase()),
+        title: Text(textControllers.searchImageQuery.value.text.toUpperCase()),
         centerTitle: true,
         leading: Builder(
             builder: (context) => IconButton(
                 onPressed: () {
                   ///need to clear the searchImage TextEditingController value
                   ///and also reset the PageNumber to default value
-                  textControllers.searchImage.clear();
+                  textControllers.searchImageQuery.clear();
                   searchImagePageCounter.resetPageNumber();
                   Navigator.pop(context);
                 },

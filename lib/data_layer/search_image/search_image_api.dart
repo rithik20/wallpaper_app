@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:free_wallpaper/data_layer/display_image/search_image_api_model.dart';
+import 'package:free_wallpaper/data_layer/search_image/search_image_api_model.dart';
 
 class SearchImageApiData {
 
@@ -13,8 +13,9 @@ class SearchImageApiData {
     //declaring Map for storing the Api data
     Map<String,dynamic> apiResult = {};
 
+    //passing the orientation = portrait to get images in that orientation
     String searchUrl =
-        "https://api.pexels.com/v1/search?query= $query&per_page=80";
+        "https://api.pexels.com/v1/search?query= $query&per_page=80&orientation=portrait";
 
     try {
       final response = await dio.get(searchUrl,

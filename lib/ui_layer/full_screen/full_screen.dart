@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:free_wallpaper/business_logic_layer/platform_specific_code/wallpaper_service/set_wallpaper.dart';
 import 'package:provider/provider.dart';
-
-import '../../business_logic_layer/search_image/download_image/download_image.dart';
 
 class FullScreen extends StatelessWidget {
   final String imageUrl;
@@ -11,8 +9,7 @@ class FullScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    final imageDownloader = Provider.of<ImageDownloader>(context);
+    final changeWallpaper = Provider.of<ChangeWallpaper>(context);
 
     return Scaffold(
       backgroundColor: Colors.black12,
@@ -24,31 +21,43 @@ class FullScreen extends StatelessWidget {
           fit: BoxFit.contain,
         ),
       ),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Container(
-            width: 55.0,
-            height: 55.0,
-            decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(15.0))),
-            child: IconButton(
-              color: Colors.black,
-              onPressed: () {
-                ///this is for user to set the image us Wallpaper
-              },
-              icon: const Icon(Icons.done),
-            ),
+      floatingActionButton: Container(
+        padding: const EdgeInsets.only(left: 30.0, right: 30.0),
+        height: 55.0,
+        decoration: const BoxDecoration(
+            color: Colors.white12,
+            borderRadius: BorderRadius.all(Radius.circular(15.0))),
+        child: MaterialButton(
+          textColor: Colors.white,
+          onPressed: () async {
+            ///this is for user's, to set the image us their Wallpaper
+            ///call the setNewWallpaperWithImage() method in the [ChangeWallpaper]
+            /// class, to change the Wallpaper of the User's device
+            await changeWallpaper.setNewWallpaperWithImage(imageUrl);
+
+            ///a SnackBar show with the state of isWallpaperChanged variable in
+            ///the [ChangeWallpaper] class
+            if (changeWallpaper.isWallpaperChanged == true) {
+              const successSnackBar = SnackBar(
+                content: Text("Wallpaper Changed SuccessFully"),
+                duration: Duration(seconds: 2),
+              );
+              if (!context.mounted) return;
+              ScaffoldMessenger.of(context).showSnackBar(successSnackBar);
+            } else {
+              const notSuccessSnackBar = SnackBar(
+                content: Text("There is an Error Wallpaper not Changed"),
+                duration: Duration(seconds: 2),
+              );
+              if (!context.mounted) return;
+              ScaffoldMessenger.of(context).showSnackBar(notSuccessSnackBar);
+            }
+          },
+          child: const Text(
+            "Set as Wallpaper",
+            style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
           ),
-          FloatingActionButton(
-            onPressed: () {
-              ///this button is for downloading the image to the user's device
-              imageDownloader.downloadImage(imageUrl);
-            },
-            child: const Icon(CupertinoIcons.down_arrow),
-          ),
-        ],
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );

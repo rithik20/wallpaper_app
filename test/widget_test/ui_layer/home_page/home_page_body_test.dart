@@ -1,12 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:free_wallpaper/business_logic_layer/app_style_provider/style.dart';
 import 'package:free_wallpaper/business_logic_layer/curated_images/curated_images_logic.dart';
 import 'package:free_wallpaper/business_logic_layer/search_image/search_image_logic.dart';
 import 'package:free_wallpaper/business_logic_layer/text_controllers_provider/text_controllers.dart';
-import 'package:free_wallpaper/ui_layer/home_page/home_page.dart';
+import 'package:free_wallpaper/ui_layer/home_page/curated_images/curated_images.dart';
 import 'package:free_wallpaper/ui_layer/home_page/home_page_body.dart';
-import 'package:free_wallpaper/ui_layer/reusable_widgets/bottom_navigation/bottom_navigation_bar.dart';
 import 'package:provider/provider.dart';
 
 void main(){
@@ -16,7 +16,7 @@ void main(){
     curatedList = await curatedImagesAPI.getCuratedImagesFromDataProvider();
   });
 
-  testWidgets("HomePage Test", (widgetTester) async{
+  testWidgets("HomePageBody Test", (widgetTester) async{
 
     await widgetTester.pumpWidget(MultiProvider(
       providers: [
@@ -25,15 +25,16 @@ void main(){
         ChangeNotifierProvider(create: (context) => SearchedImageProvider()),
       ],
       child: const MaterialApp(
-        home: HomePage(),
+        home: HomePageBody(),
       ),
     ));
 
-    expect(find.byType(Scaffold), findsOneWidget);//passed
-    expect(find.byType(AppBar), findsWidgets);//passed
-    expect(find.byType(Text), findsWidgets);//passed
-    expect(find.text("HD Wallpapers"), findsWidgets);//passed
-    expect(find.byType(HomePageBody), findsWidgets);//passed
-    expect(find.byType(BottomNavigation), findsOneWidget);//passed
+    expect(find.byType(Container), findsWidgets);//passed
+    expect(find.byType(Column), findsWidgets);//passed
+    expect(find.byType(TextFormField), findsWidgets);//passed
+    expect(find.text("Type here to Search"), findsWidgets);//passed
+    expect(find.byType(IconButton), findsWidgets);//passed
+    expect(find.byIcon(CupertinoIcons.search), findsWidgets);//passed
+    expect(find.byType(CuratedImages), findsWidgets);//passed
   });
 }

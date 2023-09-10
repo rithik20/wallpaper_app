@@ -20,7 +20,7 @@ class DisplayImageBody extends StatelessWidget {
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
 
-                  ///the SearchedImageProvider has a searchedImageList list
+                  ///the [SearchedImageProvider] class has a searchedImageList list
                   ///this list holds all the images returned by the Data Layer
                   itemCount: image.searchedImageList.length,
                   itemBuilder: (context, index) {
@@ -29,6 +29,8 @@ class DisplayImageBody extends StatelessWidget {
                       child: InkWell(
                         onTap: () {
                           ///if the user tapped any image then show it in fullScreen
+                          ///pass the image's url String from the searchedImageList
+                          ///list to FullScreen Widget
                           Navigator.push(
                               context,
                               MaterialPageRoute(

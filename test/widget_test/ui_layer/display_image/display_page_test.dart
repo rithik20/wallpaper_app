@@ -26,7 +26,7 @@ void main() {
     expect(find.byType(Scaffold), findsOneWidget);//passed
     expect(find.byType(AppBar), findsOneWidget);//passed
     expect(find.byType(Text), findsOneWidget);//passed
-    expect(find.text(TextControllers().searchImage.value.text.toUpperCase()), findsOneWidget);//passed
+    expect(find.text(TextControllers().searchImageQuery.value.text.toUpperCase()), findsOneWidget);//passed
     expect(find.byType(IconButton), findsOneWidget);//passed
     expect(find.byIcon(Icons.arrow_back), findsOneWidget);
     expect(find.byType(DisplayImageBody), findsOneWidget);//passed

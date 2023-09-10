@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:free_wallpaper/business_logic_layer/app_style_provider/style.dart';
 import 'package:free_wallpaper/ui_layer/reusable_widgets/bottom_navigation/bottom_navigation_bar.dart';
 import 'package:free_wallpaper/ui_layer/settings/app_theme/app_theme.dart';
+import 'package:provider/provider.dart';
 
 class Settings extends StatelessWidget {
   const Settings({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final style = Provider.of<Style>(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Settings"),
+        title: Text("Settings", style: TextStyle(color: style.appBarTitleColor),),
         leading: Builder(
             builder: (context) => IconButton(
                 onPressed: () {
