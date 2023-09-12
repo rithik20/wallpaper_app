@@ -55,7 +55,17 @@ class MainActivity : FlutterActivity() {
                     result.error("SET_WALLPAPER_ERROR", "Failed to set wallpaper", null)
                 }
 
-            } else {
+            } else if(call.method == "show_success_toast_message"){
+
+                try {
+                    val toastWidget = ToastWidget()
+                    toastWidget.showSuccessToastWidget(this)
+                    result.success(true)
+                } catch (e: Exception){
+                    result.error("SET_WALLPAPER_ERROR", "Failed to set wallpaper", null)
+                }
+            }
+            else {
                 result.notImplemented()
             }
         }
