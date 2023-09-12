@@ -34,24 +34,6 @@ class FullScreen extends StatelessWidget {
             ///call the setNewWallpaperWithImage() method in the [ChangeWallpaper]
             /// class, to change the Wallpaper of the User's device
             await changeWallpaper.setNewWallpaperWithImage(imageUrl);
-
-            ///a SnackBar show with the state of isWallpaperChanged variable in
-            ///the [ChangeWallpaper] class
-            if (changeWallpaper.isWallpaperChanged == true) {
-              const successSnackBar = SnackBar(
-                content: Text("Wallpaper Changed SuccessFully"),
-                duration: Duration(seconds: 2),
-              );
-              if (!context.mounted) return;
-              ScaffoldMessenger.of(context).showSnackBar(successSnackBar);
-            } else {
-              const notSuccessSnackBar = SnackBar(
-                content: Text("There is an Error Wallpaper not Changed"),
-                duration: Duration(seconds: 2),
-              );
-              if (!context.mounted) return;
-              ScaffoldMessenger.of(context).showSnackBar(notSuccessSnackBar);
-            }
           },
           child: const Text(
             "Set as Wallpaper",

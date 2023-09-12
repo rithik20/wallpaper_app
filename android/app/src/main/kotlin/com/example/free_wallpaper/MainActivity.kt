@@ -55,17 +55,28 @@ class MainActivity : FlutterActivity() {
                     result.error("SET_WALLPAPER_ERROR", "Failed to set wallpaper", null)
                 }
 
-            } else if(call.method == "show_success_toast_message"){
+            } else if (call.method == "show_success_toast_message") {
 
                 try {
-                    val toastWidget = ToastWidget()
-                    toastWidget.showSuccessToastWidget(this)
+                    //creating an object for ToastWidget() class
+                    val successToastWidget = SuccessToastWidget()
+                    //calling the showSuccessToastWidget() with the MainActivity's Context
+                    successToastWidget.showSuccessToastWidget(this)
                     result.success(true)
-                } catch (e: Exception){
+                } catch (e: Exception) {
                     result.error("SET_WALLPAPER_ERROR", "Failed to set wallpaper", null)
                 }
-            }
-            else {
+            } else if (call.method == "show_not_success_toast_message") {
+                try {
+                    //creating an object for ToastWidget() class
+                    val successToastWidget = NotSuccessToastWidget()
+                    //calling the showSuccessToastWidget() with the MainActivity's Context
+                    successToastWidget.showUnSuccessToastWidget(this)
+                    result.success(true)
+                } catch (e: Exception) {
+                    result.error("SET_WALLPAPER_ERROR", "Failed to set wallpaper", null)
+                }
+            } else {
                 result.notImplemented()
             }
         }

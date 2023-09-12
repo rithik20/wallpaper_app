@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:free_wallpaper/business_logic_layer/app_style_provider/style.dart';
 import 'package:free_wallpaper/business_logic_layer/app_theme_state_management/dark_mode_logic.dart';
 import 'package:free_wallpaper/business_logic_layer/curated_images/curated_images_logic.dart';
+import 'package:free_wallpaper/business_logic_layer/platform_specific_code/toast_widget_service/toast_widget_service.dart';
 import 'package:free_wallpaper/business_logic_layer/platform_specific_code/wallpaper_service/set_wallpaper.dart';
 import 'package:free_wallpaper/business_logic_layer/search_image/search_image_page_count.dart';
 import 'package:free_wallpaper/business_logic_layer/text_controllers_provider/text_controllers.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => CuratedImagesAPI()),
         ChangeNotifierProvider(create: (context) => SearchImagePageCounter()),
         ChangeNotifierProvider(create: (context) => ChangeWallpaper()),
+        Provider(create: (context) => ToastWidgetService()),
         ChangeNotifierProvider(create: (context) => AppThemeLogic()),
       ],
       child: MaterialApp(
