@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:free_wallpaper/business_logic_layer/search_image/search_image_page_count.dart';
 import 'package:provider/provider.dart';
-import '../../business_logic_layer/search_image/search_image_logic.dart';
+import '../../business_logic_layer/backend_api/search_image/search_image_logic.dart';
+import '../../business_logic_layer/backend_api/search_image/search_image_page_count.dart';
 import '../../business_logic_layer/text_controllers_provider/text_controllers.dart';
 
 class GetMoreImages extends StatelessWidget {

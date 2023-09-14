@@ -16,12 +16,13 @@ class SuccessToastWidget {
     }
 }
 
-class NotSuccessToastWidget{
+class NotSuccessToastWidget {
 
-    fun showUnSuccessToastWidget(context: Context){
+    fun showUnSuccessToastWidget(context: Context) {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
-            Toast.makeText(context, "There is an Error Wallpaper Not Changed", Toast.LENGTH_SHORT).show()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            Toast.makeText(context, "There is an Error Wallpaper Not Changed", Toast.LENGTH_SHORT)
+                .show()
         }
     }
 }

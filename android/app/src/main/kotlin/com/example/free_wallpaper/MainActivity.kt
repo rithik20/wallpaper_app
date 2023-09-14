@@ -9,16 +9,16 @@ import androidx.annotation.NonNull
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MainActivity : FlutterActivity() {
     private val channel = "wallpaper"
@@ -74,7 +74,16 @@ class MainActivity : FlutterActivity() {
                     successToastWidget.showUnSuccessToastWidget(this)
                     result.success(true)
                 } catch (e: Exception) {
-                    result.error("SET_WALLPAPER_ERROR", "Failed to set wallpaper", null)
+                    result.error("Toast_ERROR", "Failed to set Toast", null)
+                }
+            } else if (call.method == "show_downloaded_toast") {
+
+                try {
+                    val showDownloadToast = DownloadImageToDownloads()
+                    showDownloadToast.showWallpaperDownloadedToast(this)
+                    result.success(true)
+                } catch (e: Exception) {
+                    result.error("Download_Toast_ERROR", "Failed to set Download Toast", null)
                 }
             } else {
                 result.notImplemented()

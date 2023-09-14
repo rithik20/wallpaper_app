@@ -1,8 +1,10 @@
-import 'package:dio/dio.dart';
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:http/http.dart' as http;
 import 'package:free_wallpaper/data_layer/curated_photos/curated_photos_data_model.dart';
 
 class CuratedPhotos {
-  final Dio dio = Dio();
 
   Future<List<Map<String, dynamic>>> getCuratedPhotos() async {
     List<Map<String, dynamic>> curatedList = [];
@@ -10,23 +12,25 @@ class CuratedPhotos {
 
     try {
       //calling the curated api to get the result
-      final response = await dio.get("https://api.pexels.com/v1/curated?page=1&per_page=80",
-          options: Options(headers: <String, String>{
+      final response = await http.get(Uri.parse("https://api.pexels.com/v1/curated?page=1&per_page=80"),
+          headers: <String, String>{
             'Authorization':
             'WXYhACnUgdqxAC9Amo14poJxJt5ymB43XhCMlMjyaOQQ8kaYT3dMT6NL'
-          }));
+          });
       if (response.statusCode == 200) {
         ///if getting the result from the API Then,
+        modelMap = jsonDecode(response.body);
         ///pass that value to the model class CuratedImagesApiModel's fromJson method
-        final curatedModel = CuratedImagesApiModel.fromJson(response.data);
-        modelMap = curatedModel.toJson();
+        final curatedModel = CuratedImagesApiModel.fromJson(modelMap);
+        Map<String, dynamic> curatedMap = curatedModel.toJson();
 
         ///add that map to the curatedList
-        curatedList = modelMap['photos'];
+        curatedList = curatedMap['photos'];
       }else{
 
+        return curatedList;
       }
-    }on DioException catch(e){
+    }on HttpException catch(e){
       throw e.toString();
     }
 

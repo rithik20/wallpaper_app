@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../business_logic_layer/app_style_provider/style.dart';
-import '../../business_logic_layer/search_image/search_image_logic.dart';
+import '../../business_logic_layer/backend_api/search_image/search_image_logic.dart';
 import '../../business_logic_layer/text_controllers_provider/text_controllers.dart';
 import '../display_page/display_page.dart';
 import '../display_page/no_data_to_show.dart';
@@ -17,6 +17,8 @@ class HomePageBody extends StatelessWidget {
 
     final searchedImageProvider = Provider.of<SearchedImageProvider>(context);
 
+    final style = Provider.of<Style>(context);
+
     return Container(
       padding: const EdgeInsets.all(5.0),
       width: MediaQuery.of(context).size.width,
@@ -24,7 +26,7 @@ class HomePageBody extends StatelessWidget {
         ///Text Field for searching the images from the server
         TextFormField(
           controller: textControllers.searchImageQuery,
-          cursorColor: Colors.black,
+          cursorColor: style.appBarTitleColor,
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
               hintText: "Type here to Search",
@@ -78,7 +80,7 @@ class HomePageBody extends StatelessWidget {
                     weight: 25.0,
                     size: 30.0,
                   )),
-              suffixIconColor: Provider.of<Style>(context).searchButtonColor,
+              suffixIconColor: style.searchButtonColor,
               focusedBorder: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(30.0))),
               border: const OutlineInputBorder(

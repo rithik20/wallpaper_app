@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:free_wallpaper/business_logic_layer/search_image/search_image_logic.dart';
+import 'package:free_wallpaper/business_logic_layer/backend_api/search_image/search_image_logic.dart';
 import 'package:free_wallpaper/business_logic_layer/text_controllers_provider/text_controllers.dart';
 import 'package:free_wallpaper/ui_layer/display_page/display_page_body.dart';
 import 'package:provider/provider.dart';

@@ -1,9 +1,10 @@
-import 'package:dio/dio.dart';
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:http/http.dart' as http;
 import 'package:free_wallpaper/data_layer/search_image/search_image_api_model.dart';
 
 class SearchImageApiData {
-
-  final Dio dio = Dio();
 
   ///call this class to get the images by using a search Query
   Future<List<Map<String, dynamic>>> searchedImages(String query) async {
@@ -18,15 +19,16 @@ class SearchImageApiData {
         "https://api.pexels.com/v1/search?query= $query&per_page=80&orientation=portrait";
 
     try {
-      final response = await dio.get(searchUrl,
-          options: Options(headers: <String, String>{
-            'Authorization':
-                'WXYhACnUgdqxAC9Amo14poJxJt5ymB43XhCMlMjyaOQQ8kaYT3dMT6NL'
-          }));
+
+      final response = await http.get(Uri.parse(searchUrl),
+      headers: <String, String>{
+        'Authorization':
+        'WXYhACnUgdqxAC9Amo14poJxJt5ymB43XhCMlMjyaOQQ8kaYT3dMT6NL'
+      });
 
       if(response.statusCode == 200){
 
-        apiResult = response.data;
+        apiResult = jsonDecode(response.body);
 
         final searchImageApi = SearchImageApi.fromJson(apiResult);
 
@@ -38,7 +40,7 @@ class SearchImageApiData {
       }else{
         return list;
       }
-    } on DioException catch (e) {
+    } on HttpException catch (e) {
       throw e.toString();
     }
   }
@@ -55,15 +57,15 @@ class SearchImageApiData {
         "https://api.pexels.com/v1/search?query= $query&per_page=80&page=$pageNUmber";
 
     try {
-      final response = await dio.get(searchUrl,
-          options: Options(headers: <String, String>{
+      final response = await http.get(Uri.parse(searchUrl),
+          headers: <String, String>{
             'Authorization':
             'WXYhACnUgdqxAC9Amo14poJxJt5ymB43XhCMlMjyaOQQ8kaYT3dMT6NL'
-          }));
+          });
 
       if(response.statusCode == 200){
 
-        apiResult = response.data;
+        apiResult = jsonDecode(response.body);
 
         final searchImageApi = SearchImageApi.fromJson(apiResult);
 
@@ -75,7 +77,7 @@ class SearchImageApiData {
       }else{
         return moreImagesList;
       }
-    } on DioException catch (e) {
+    } on HttpException catch (e) {
       throw e.toString();
     }
   }
