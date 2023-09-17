@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:free_wallpaper/ui_layer/display_page/get_more_images.dart';
 import 'package:free_wallpaper/ui_layer/home_page/home_page_body.dart';
-import '../../../data_layer/search_image/search_image_api.dart';
+import '../../../data_layer/backend_api/search_image/search_image_api.dart';
 
 class SearchedImageProvider extends ChangeNotifier {
   //this is the list that holds the images, that the user searched

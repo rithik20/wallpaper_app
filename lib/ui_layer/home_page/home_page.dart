@@ -9,12 +9,13 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = Provider.of<Style>(context);
-
     return Scaffold(
       appBar: AppBar(
-        elevation: 0.0,
-        title: style.appBarTitle,
+        title: Consumer<Style>(
+          builder: (context,appBarTitleColorState, child) {
+            return Text("HD Wallpapers", style: TextStyle(color: appBarTitleColor, fontWeight: FontWeight.bold),);
+          }
+        ),
         centerTitle: true,
       ),
       body: const HomePageBody(),

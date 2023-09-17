@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:free_wallpaper/ui_layer/reusable_widgets/bottom_navigation/bottom_navigation_bar.dart';
+import 'package:get/get.dart';
 
-class IndexNumber extends ChangeNotifier{
+class IndexNumber with ChangeNotifier{
 
   int index = 0;
 
@@ -11,5 +12,15 @@ class IndexNumber extends ChangeNotifier{
   void changeIndex(int indexNumber){
     index = indexNumber;
     notifyListeners();
+  }
+}
+
+class IndexNumberState extends GetxController{
+
+  int index = 0;
+
+  void changeIndex(int indexNumber){
+    index = indexNumber;
+    update();
   }
 }

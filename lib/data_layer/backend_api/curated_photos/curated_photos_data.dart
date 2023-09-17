@@ -1,8 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:http/http.dart' as http;
-import 'package:free_wallpaper/data_layer/curated_photos/curated_photos_data_model.dart';
+import 'curated_photos_data_model.dart';
 
 class CuratedPhotos {
 

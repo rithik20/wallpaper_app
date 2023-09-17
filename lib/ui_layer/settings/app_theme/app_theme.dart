@@ -25,6 +25,9 @@ class AppTheme extends StatelessWidget {
               ///this variable holds the value of the Switch.
                 value: darkThemeKeyValue,
                 onChanged: (value) async{
+                  ///call the changeThemeMode() method using the value from the
+                  ///onChanged function, to change the Switch Widget's state
+                  await switchState.changeThemeMode(value);
                   ///need to rebuild the Colors of Constants in Style class
                   ///so call the Style class's method based on the onChanged
                   ///function's value
@@ -33,9 +36,6 @@ class AppTheme extends StatelessWidget {
                   }else{
                     style.lightTheme();
                   }
-                  ///call the changeThemeMode() method using the value from the
-                  ///onChanged function, to change the Switch Widget's state
-                  await switchState.changeThemeMode(value);
                 });
           }
         ),

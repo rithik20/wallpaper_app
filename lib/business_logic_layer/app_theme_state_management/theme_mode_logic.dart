@@ -7,10 +7,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 //this class is for App's theme change
 class AppThemeLogic extends ChangeNotifier{
 
-  bool isThemeSwitched = false;
 
   ///need the [AppThemeSettings] class dependency here to store the
-  ///value of [isThemeSwitched] to the [SharedPreferences] key called "darkTheme"
+  ///value of darkMode to the [SharedPreferences] key called "darkTheme"
   final AppThemeSettings appThemeSettings = AppThemeSettings();
 
   ///call this method if the user need to change the theme of the app
@@ -19,8 +18,7 @@ class AppThemeLogic extends ChangeNotifier{
   ///
   Future<void> changeThemeMode(bool value) async{
 
-    isThemeSwitched = value;
-    darkThemeKeyValue = isThemeSwitched;
+    darkThemeKeyValue = value;
     await appThemeSettings.appThemeSettings(value);
     notifyListeners();
   }

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:free_wallpaper/ui_layer/full_screen/full_screen.dart';
 import 'package:provider/provider.dart';
-import '../../business_logic_layer/backend_api/image_url_index/image_url_index.dart';
+import '../../business_logic_layer/backend_api/image_details/image_details.dart';
 import '../../business_logic_layer/backend_api/search_image/search_image_logic.dart';
-import '../full_screen/full_screen.dart';
 
 class DisplayImageBody extends StatelessWidget {
   const DisplayImageBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final imageURLIndex = Provider.of<ImageURLIndex>(context);
+    final imageDetails = Provider.of<ImageDetails>(context);
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: Column(
@@ -32,18 +32,18 @@ class DisplayImageBody extends StatelessWidget {
                         onTap: () {
                           ///if the user tapped any image then show it in fullScreen
                           ///pass the image's url, image Name, and index from the searchedImageList
-                          ///to the changeImageURLIndexProperties() method in the
-                          ///ImageURLIndex class
-                          imageURLIndex.changeImageURLIndexProperties(image.searchedImageList[index]
-                          ['src']['large2x'],image.searchedImageList[index]['alt'], index);
+                          ///to the changeImageDetailsProperties() method in the
+                          ///ImageDetails class
+                          imageDetails.changeImageDetailsProperties(
+                              image.searchedImageList[index]['src']['large2x'],
+                              image.searchedImageList[index]['alt'],
+                            image.searchedImageList[index]['photographer']
+                          );
                           ///then navigate to the FullScreen Widget
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const FullScreen()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> const FullScreen()));
                         },
                         child: Image.network(
-                          image.searchedImageList[index]['src']['medium'],
+                          image.searchedImageList[index]['src']['large'],
                           fit: BoxFit.cover,
                         ),
                       ),

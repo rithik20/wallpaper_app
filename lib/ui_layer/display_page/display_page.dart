@@ -17,8 +17,6 @@ class DisplayImage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        ///getting the Search term from searchImage TextController from TextControllers dependency here
-        title: Text(textControllers.searchImageQuery.value.text.toUpperCase()),
         centerTitle: true,
         leading: Builder(
             builder: (context) => IconButton(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:free_wallpaper/data_layer/curated_photos/curated_photos_data.dart';
+import '../../../data_layer/backend_api/curated_photos/curated_photos_data.dart';
 
 late List<Map<String, dynamic>> curatedList;
 

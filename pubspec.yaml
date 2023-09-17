@@ -37,10 +37,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   provider: ^6.0.5
   mockito: ^5.4.2
-  permission_handler:
   flutter_file_downloader: ^1.1.2
   shared_preferences: ^2.2.1
   http: ^1.1.0
+  permission_handler: ^11.0.0
+  build_runner: ^2.4.6
+  get: ^4.6.6
 
 flutter_launcher_icons:
   android: "launcher_icon"
