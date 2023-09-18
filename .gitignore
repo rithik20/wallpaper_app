@@ -44,5 +44,3 @@ app.*.map.json
 /android/app/release
 
 # project files
-lib/data_layer/backend_api/search_image/search_image_api.dart
-lib/data_layer/backend_api/curated_photos/curated_photos_data.dart
