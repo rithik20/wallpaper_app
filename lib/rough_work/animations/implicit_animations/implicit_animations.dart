@@ -6,8 +6,6 @@ class AnimationsRough extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    print("object");
     final prop = Provider.of<Properties>(context, listen: false);
     return Scaffold(
       body: Center(

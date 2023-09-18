@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:free_wallpaper/business_logic_layer/text_controllers_provider/text_controllers.dart';
 import 'package:provider/provider.dart';
+import '../../business_logic_layer/controllers/text_controllers_provider/text_controllers.dart';
 
 //this Widget will show an Image to the user if the user can't get any results from backend
 class NoDataToShow extends StatelessWidget {

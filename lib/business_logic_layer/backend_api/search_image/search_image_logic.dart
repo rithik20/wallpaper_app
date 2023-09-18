@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:free_wallpaper/ui_layer/display_page/get_more_images.dart';
+import 'package:free_wallpaper/ui_layer/display_page/display_page_body.dart';
 import 'package:free_wallpaper/ui_layer/home_page/home_page_body.dart';
 import '../../../data_layer/backend_api/search_image/search_image_api.dart';
 
@@ -26,7 +26,7 @@ class SearchedImageProvider extends ChangeNotifier {
 
   ///this business logic is for getting more images from the server using the
   ///query that the user already entered. This method is called in the
-  ///[GetMoreImages] class.
+  ///[DisplayImageBody] class.
   Future<void> getMoreImagesFromTheQuery(String query, int pageNUmber) async {
     searchedImageList +=
         await searchImageApiData.getMoreImages(query, pageNUmber);

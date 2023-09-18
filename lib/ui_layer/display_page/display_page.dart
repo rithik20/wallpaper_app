@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:free_wallpaper/ui_layer/display_page/display_page_body.dart';
-import 'package:free_wallpaper/ui_layer/display_page/get_more_images.dart';
 import 'package:provider/provider.dart';
 import '../../business_logic_layer/backend_api/search_image/search_image_page_count.dart';
-import '../../business_logic_layer/text_controllers_provider/text_controllers.dart';
+import '../../business_logic_layer/controllers/text_controllers_provider/text_controllers.dart';
 
 class DisplayImage extends StatelessWidget {
   const DisplayImage({super.key});
@@ -30,7 +29,6 @@ class DisplayImage extends StatelessWidget {
                 icon: const Icon(Icons.arrow_back))),
       ),
       body: const DisplayImageBody(),
-      floatingActionButton: const GetMoreImages(),
     );
   }
 }

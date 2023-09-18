@@ -14,7 +14,7 @@ class Settings extends StatelessWidget {
     ///BottomNavigationBar's currentIndex number. If the user Presses the
     ///arrow_back Icon then Navigate to the HomePage Widget and also change the
     ///currentIndex number to 0.
-    final bottomNavigationIndexNumber = Provider.of<IndexNumber>(context);
+    final bottomNavigationIndexNumber = Provider.of<IndexNumberState>(context);
     return Scaffold(
       appBar: AppBar(
         title: Consumer<Style>(

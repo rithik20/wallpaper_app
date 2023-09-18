@@ -32,6 +32,8 @@ late Color bottomNavigationItemColor;
 ///[AppBar] widget
 late Color appBarTitleColor;
 
+///these two functions is called to assign values to the above late variables
+///is called in the main function of this application
 void sharedPreferencesDarkTheme() {
   appBarTitleColor = Colors.white;
   searchButtonColor = Colors.white;
