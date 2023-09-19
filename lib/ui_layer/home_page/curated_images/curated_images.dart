@@ -1,5 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_image/network.dart';
 import 'package:free_wallpaper/main.dart';
 import 'package:free_wallpaper/ui_layer/full_screen/full_screen.dart';
 import 'package:provider/provider.dart';
@@ -50,9 +50,8 @@ class CuratedImages extends StatelessWidget {
                             },
 
                             ///show the images from the network
-                            child: Image(
-                              image: NetworkImageWithRetry(
-                                  data.data?[index]['src']['large']),
+                            child: CachedNetworkImage(
+                              imageUrl: data.data?[index]['src']['large'],
                               fit: BoxFit.cover,
                             ),
                           ),

@@ -1,5 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_image/flutter_image.dart';
 import 'package:free_wallpaper/business_logic_layer/controllers/scroll_controllers/scroll_controllers.dart';
 import 'package:free_wallpaper/ui_layer/full_screen/full_screen.dart';
 import 'package:provider/provider.dart';
@@ -55,9 +55,9 @@ class DisplayImageBody extends StatelessWidget {
                                       builder: (context) =>
                                           const FullScreen()));
                             },
-                            child: Image(
-                              image: NetworkImageWithRetry(image
-                                  .searchedImageList[index]['src']['large']),
+                            child: CachedNetworkImage(
+                              imageUrl: image.searchedImageList[index]['src']
+                                  ['large'],
                               fit: BoxFit.cover,
                             )),
                       );

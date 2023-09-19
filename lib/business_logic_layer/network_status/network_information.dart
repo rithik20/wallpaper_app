@@ -20,10 +20,10 @@ class NetworkState extends ChangeNotifier {
     notifyListeners();
   }
 
-  Stream<bool> getNetworkStream() async*{
-
-    while(true){
-
+  ///this [Stream] will check the Internet Connection Status in every seconds
+  ///using [InternetConnectionChecker] package, and return's a boolean value
+  Stream<bool> getNetworkStream() async* {
+    while (true) {
       yield await InternetConnectionChecker().hasConnection;
       await Future.delayed(const Duration(seconds: 1));
     }

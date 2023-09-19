@@ -1,6 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_image/flutter_image.dart';
 import 'package:free_wallpaper/business_logic_layer/download_image_to_downloads/download_images_to_downloads.dart';
 import 'package:provider/provider.dart';
 import '../../business_logic_layer/backend_api/image_details/image_details.dart';
@@ -29,11 +29,11 @@ class FullScreen extends StatelessWidget {
             }
           },
           child: Consumer<ImageProviderClass>(builder: (context, image, child) {
-            return Image(
+            return CachedNetworkImage(
               ///showing the image in the network using the imageList
               ///from the ImageProviderClass
-              image: NetworkImageWithRetry(imageProvider
-                  .imageList[imageProvider.indexNumber]['src']['large2x']),
+              imageUrl: imageProvider
+                  .imageList[imageProvider.indexNumber]['src']['large2x'],
               fit: BoxFit.contain,
             );
           }),
