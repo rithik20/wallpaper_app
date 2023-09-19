@@ -19,4 +19,13 @@ class NetworkState extends ChangeNotifier {
     isDeviceHasConnection = await InternetConnectionChecker().hasConnection;
     notifyListeners();
   }
+
+  Stream<bool> getNetworkStream() async*{
+
+    while(true){
+
+      yield await InternetConnectionChecker().hasConnection;
+      await Future.delayed(const Duration(seconds: 1));
+    }
+  }
 }

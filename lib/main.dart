@@ -55,16 +55,6 @@ Future<void> main() async {
   //call the getNetworkState() method and initialize the isDeviceHasConnection late variable
   await networkState.getNetworkState();
 
-  //creating an object for [CuratedImagesAPI] class
-  final CuratedImagesAPI curatedImagesAPI = CuratedImagesAPI();
-
-  //if the isDeviceHasConnection is "true" then,
-  if(isDeviceHasConnection){
-
-    //then call the getCuratedImagesFromDataProvider() using the object to return the list
-    curatedList = await curatedImagesAPI.getCuratedImagesFromDataProvider();
-  }
-
   runApp(const MyApp());
 }
 
@@ -105,12 +95,19 @@ class MyApp extends StatelessWidget {
               ? ThemeData.dark(useMaterial3: true)
               : ThemeData.light(useMaterial3: true),
 
-          ///if the isDeviceHasConnection late variable is true then it means
-          ///the Device has network connection, so call the HomePage.
+          ///if the Device has network connection, then call the HomePage.
           ///otherwise  NoNetworkConnection page.
-          ///the isDeviceHasConnection late variable is declared in the
-          ///NetWorkState class
-          home: isDeviceHasConnection ? const HomePage() : const NoNetworkConnection(),
+          ///the getNetworkStream() is declared in the NetWorkState class
+          home: StreamBuilder<bool>(
+            stream: NetworkState().getNetworkStream(),
+            builder: (context, networkState){
+              if(networkState.data == true){
+                return const HomePage();
+              }else{
+                return const NoNetworkConnection();
+              }
+            },
+          )
         );
       }),
     );
