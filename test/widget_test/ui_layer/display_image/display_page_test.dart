@@ -1,25 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:free_wallpaper/business_logic_layer/backend_api/search_image/search_image_logic.dart';
-import 'package:free_wallpaper/business_logic_layer/backend_api/search_image/search_image_page_count.dart';
-import 'package:free_wallpaper/business_logic_layer/controllers/text_controllers_provider/text_controllers.dart';
+import 'package:free_wallpaper/riverpod/providers/controllers/text_controllers_provider/text_controllers.dart';
 import 'package:free_wallpaper/ui_layer/display_page/display_page.dart';
 import 'package:free_wallpaper/ui_layer/display_page/display_page_body.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   testWidgets("DisplayPage Test", (widgetTester) async {
     await widgetTester.pumpWidget(
-      MultiProvider(
-        providers: [
-          Provider(create: (context)=> TextControllers()),
-          ChangeNotifierProvider(create: (context) => SearchedImageProvider()),
-          ChangeNotifierProvider(create: (context) => SearchImagePageCounter()),
-        ],
-        child: const MaterialApp(
+      const MaterialApp(
           home: DisplayImage(),
         ),
-      ),
     );
 
     expect(find.byType(Scaffold), findsOneWidget);//passed

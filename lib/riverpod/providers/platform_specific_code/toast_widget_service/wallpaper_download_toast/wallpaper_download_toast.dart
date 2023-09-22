@@ -1,5 +1,5 @@
 import 'package:flutter/services.dart';
-import 'package:free_wallpaper/business_logic_layer/download_image_to_downloads/download_images_to_downloads.dart';
+import 'package:free_wallpaper/riverpod/providers/download_image_to_downloads/download_images_to_downloads.dart';
 
 class WallpaperDownloadToast {
 

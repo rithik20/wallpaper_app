@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:free_wallpaper/business_logic_layer/permission_handler/storage_permission.dart';
-import 'package:free_wallpaper/business_logic_layer/platform_specific_code/toast_widget_service/wallpaper_download_toast/wallpaper_download_toast.dart';
 import 'package:free_wallpaper/data_layer/download_image/download_image.dart';
+import '../platform_specific_code/toast_widget_service/wallpaper_download_toast/wallpaper_download_toast.dart';
 
-class DownloadImage extends ChangeNotifier {
+class DownloadImage{
   ///this [isImageDownloaded] variable holds the state that the image
   ///downloaded or not
   bool isImageDownloaded = false;

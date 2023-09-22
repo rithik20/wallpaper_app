@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-import '../../../data_layer/backend_api/curated_photos/curated_photos_data.dart';
+import '../../../../data_layer/backend_api/curated_photos/curated_photos_data.dart';
 
-class CuratedImagesAPI extends ChangeNotifier {
+class CuratedImagesAPI {
   ///need the [CuratedPhotos] class to work with Curated API from backend
   final CuratedPhotos curatedPhotos = CuratedPhotos();
 

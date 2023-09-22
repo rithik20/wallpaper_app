@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:free_wallpaper/ui_layer/home_page/curated_images/curated_images.dart';
 
-class CuratedImagePageCounter extends ChangeNotifier{
+class CuratedImagePageCounter{
 
   int pageNumber = 1;
 
@@ -10,12 +10,12 @@ class CuratedImagePageCounter extends ChangeNotifier{
   ///the [pageNumber] variable is used in the [CuratedImages] class.
   void increasePageNumber(){
     pageNumber++;
-    notifyListeners();
   }
 
   ///this method reset the [pageNumber] to 1.
   void resetPageNumber(){
     pageNumber = 1;
-    notifyListeners();
   }
 }
+
+final curatedImagesPageCounter = StateProvider((ref) => CuratedImagePageCounter());

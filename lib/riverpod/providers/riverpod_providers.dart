@@ -1,0 +1,20 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:free_wallpaper/riverpod/providers/platform_specific_code/wallpaper_change_service/set_wallpaper.dart';
+import 'package:free_wallpaper/riverpod/providers/platform_specific_code/toast_widget_service/wallpaper_set_toast/toast_widget_service.dart';
+import 'animations/implicit_animations/navigation/bottom_navigation_animation.dart';
+import 'animations/implicit_animations/navigation/display_image_navigation_animation.dart';
+import 'controllers/scroll_controllers/scroll_controllers.dart';
+import 'controllers/text_controllers_provider/text_controllers.dart';
+import 'curated_images_api/curated_images/curated_images_logic.dart';
+import 'download_image_to_downloads/download_images_to_downloads.dart';
+import 'network_status/network_information.dart';
+
+final textControllers = Provider<TextControllers>((ref) => TextControllers());
+final scrollControllers = Provider<ScrollControllers>((ref) => ScrollControllers());
+final toastWidgetService = Provider<ToastWidgetService>((ref) => ToastWidgetService());
+final bottomNavigationAnimation = Provider((ref) => BottomNavigationAnimation());
+final displayImageNavigationAnimation = Provider((ref) => DisplayImageNavigationAnimation());
+final curatedImagesApi = Provider((ref) => CuratedImagesAPI());
+final setWallpaperProvider = Provider((ref) => ChangeWallpaper());
+final downloadImageProvider = Provider((ref) => DownloadImage());
+final networkCheckerProvider = Provider((ref) => NetworkState());

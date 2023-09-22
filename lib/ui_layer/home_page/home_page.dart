@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:free_wallpaper/ui_layer/home_page/home_page_body.dart';
 import 'package:free_wallpaper/ui_layer/reusable_widgets/bottom_navigation/bottom_navigation_bar.dart';
-import 'package:provider/provider.dart';
-import '../../business_logic_layer/app_style_provider/style.dart';
+import '../../riverpod/state_notifier_providers/app_style_provider/style.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    final styles = ref.watch(style);
     return Scaffold(
       appBar: AppBar(
-        title: Consumer<Style>(
-          builder: (context,appBarTitleColorState, child) {
-            return Text("HD Wallpapers", style: TextStyle(color: appBarTitleColor, fontWeight: FontWeight.bold),);
-          }
-        ),
+        title: Text("HD Wallpapers",
+          style: TextStyle(color: styles.appBarTitleColor,
+              fontWeight: FontWeight.bold),),
         centerTitle: true,
       ),
       body: const HomePageBody(),

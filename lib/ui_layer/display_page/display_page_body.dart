@@ -1,23 +1,22 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:free_wallpaper/business_logic_layer/controllers/scroll_controllers/scroll_controllers.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:free_wallpaper/ui_layer/full_screen/full_screen.dart';
-import 'package:provider/provider.dart';
-import '../../business_logic_layer/backend_api/image_details/image_details.dart';
-import '../../business_logic_layer/backend_api/search_image/search_image_logic.dart';
-import '../../business_logic_layer/backend_api/search_image/search_image_page_count.dart';
-import '../../business_logic_layer/controllers/text_controllers_provider/text_controllers.dart';
+import '../../riverpod/providers/riverpod_providers.dart';
+import '../../riverpod/state_notifier_providers/image_details/image_details.dart';
+import '../../riverpod/state_notifier_providers/image_details/image_list_index.dart';
+import '../../riverpod/state_notifier_providers/search_image_api/search_image/search_image_logic.dart';
+import '../../riverpod/state_notifier_providers/search_image_api/search_image/search_image_page_count.dart';
 
-class DisplayImageBody extends StatelessWidget {
+class DisplayImageBody extends ConsumerWidget {
   const DisplayImageBody({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final imageDetails = Provider.of<ImageProviderClass>(context);
-    final scrollController = Provider.of<ScrollControllers>(context);
-    final getMoreImages = Provider.of<SearchedImageProvider>(context);
-    final textControllers = Provider.of<TextControllers>(context);
-    final searchImagePageCounter = Provider.of<SearchImagePageCounter>(context);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final scrollController = ref.watch(scrollControllers);
+    final searchedImages = ref.watch(searchedImagesListProvider);
+    final textController = ref.watch(textControllers);
+    final searchImagePageCounter = ref.watch(searchImagePageCounterClass);
 
     return SizedBox(
       width: MediaQuery.of(context).size.width,
@@ -25,28 +24,28 @@ class DisplayImageBody extends StatelessWidget {
         children: [
           Expanded(
             ///listing all images from the server in grid view mode here
-            child: Consumer<SearchedImageProvider>(
-                builder: (context, image, child) {
-              return GridView.builder(
+              child: GridView.builder(
                   controller: scrollController.searchImageScrollController,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
 
                   ///the [SearchedImageProvider] class has a searchedImageList list
                   ///this list holds all the images returned by the Data Layer
-                  itemCount: image.searchedImageList.length + 1,
+                  itemCount: searchedImages.imageList.length + 1,
                   itemBuilder: (context, index) {
-                    if (index < image.searchedImageList.length) {
+                    if (index < searchedImages.imageList.length) {
                       return Container(
                         padding: const EdgeInsets.all(2.0),
                         child: InkWell(
                             onTap: () {
                               ///if the user tapped any image then show it in fullScreen
-                              ///pass the searchedImageList, and index to the
-                              ///changeImageDetailsProperties() method in the
-                              ///ImageProviderClass
-                              imageDetails.changeImageDetailsProperties(
-                                  image.searchedImageList, index);
+                              ///pass the imageList to the changeImageDetailsProperties() method
+                              ///in the ImageProviderToUser class, and index to the
+                              ///changeIndexImageListIndex() method in the
+                              ///ImageListIndex
+                              ref.read(imageProviderToUser.notifier).changeImageDetailsProperties(
+                                  searchedImages.imageList);
+                              ref.read(imageListIndex.notifier).changeIndexImageListIndex(index);
 
                               ///then navigate to the FullScreen Widget
                               Navigator.push(
@@ -56,7 +55,7 @@ class DisplayImageBody extends StatelessWidget {
                                           const FullScreen()));
                             },
                             child: CachedNetworkImage(
-                              imageUrl: image.searchedImageList[index]['src']
+                              imageUrl: searchedImages.imageList[index]['src']
                                   ['large'],
                               fit: BoxFit.cover,
                             )),
@@ -77,9 +76,9 @@ class DisplayImageBody extends StatelessWidget {
 
                           ///then pass the pageNumber to the getMoreImagesFromTheQuery() method
                           ///be with the searchImageQuery TextEditingController's value.
-                          await getMoreImages.getMoreImagesFromTheQuery(
-                              textControllers.searchImageQuery.value.text,
-                              searchImagePageCounter.pageNumber);
+                          await ref.read(searchedImagesListProvider.notifier).getMoreImagesFromTheQuery(
+                              textController.searchImageQuery.value.text,
+                              ref.read(searchImagePageCounterClass.notifier).state.initialPageNumber);
                         }
                       });
                       return const Center(
@@ -88,8 +87,7 @@ class DisplayImageBody extends StatelessWidget {
                         ),
                       );
                     }
-                  });
-            }),
+                  }),
           ),
         ],
       ),

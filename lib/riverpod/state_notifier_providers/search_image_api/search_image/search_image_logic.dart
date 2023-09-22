@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:free_wallpaper/ui_layer/display_page/display_page_body.dart';
 import 'package:free_wallpaper/ui_layer/home_page/home_page_body.dart';
-import '../../../data_layer/backend_api/search_image/search_image_api.dart';
+import '../../../../data_layer/backend_api/search_image/search_image_api.dart';
 
-class SearchedImageProvider extends ChangeNotifier {
+@immutable
+class ImageUrlList{
+
+  final List<Map<String, dynamic>> imageList;
+
+  const ImageUrlList({required this.imageList});
+
+  ImageUrlList clone(List<Map<String, dynamic>> image){
+    return ImageUrlList(imageList: image);
+  }
+}
+class SearchedImageProvider extends StateNotifier<ImageUrlList>{
+  SearchedImageProvider() : super(const ImageUrlList(imageList: []));
   //this is the list that holds the images, that the user searched
   List<Map<String, dynamic>> searchedImageList = [];
 
@@ -20,7 +33,7 @@ class SearchedImageProvider extends ChangeNotifier {
     searchedImageList = await searchImageApiData.searchedImages(query);
 
     if (searchedImageList.isNotEmpty) {
-      notifyListeners();
+      state = state.clone(searchedImageList);
     }
   }
 
@@ -30,6 +43,8 @@ class SearchedImageProvider extends ChangeNotifier {
   Future<void> getMoreImagesFromTheQuery(String query, int pageNUmber) async {
     searchedImageList +=
         await searchImageApiData.getMoreImages(query, pageNUmber);
-    notifyListeners();
+    state = state.clone(searchedImageList);
   }
 }
+
+final searchedImagesListProvider = StateNotifierProvider<SearchedImageProvider, ImageUrlList>((ref) => SearchedImageProvider());

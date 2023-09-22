@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:free_wallpaper/business_logic_layer/platform_specific_code/toast_widget_service/wallpaper_set_toast/toast_widget_service.dart';
-import '../../../data_layer/platform_specific_code/wallpaper_change/wallpaper_service_api.dart';
+import 'package:free_wallpaper/riverpod/providers/platform_specific_code/toast_widget_service/wallpaper_set_toast/toast_widget_service.dart';
+import '../../../../data_layer/platform_specific_code/wallpaper_change/wallpaper_service_api.dart';
 
-class ChangeWallpaper extends ChangeNotifier{
+class ChangeWallpaper{
 
   ///this variable holds the state of wallpaper activity,
   ///if the value is false, which means the wallpaper doesn't changed
