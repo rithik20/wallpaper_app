@@ -5,7 +5,10 @@ import 'package:free_wallpaper/riverpod/state_notifier_providers/app_style_provi
 import 'package:free_wallpaper/riverpod/state_notifier_providers/switch_state/theme_mode_logic.dart';
 import 'package:free_wallpaper/ui_layer/home_page/home_page.dart';
 import 'package:free_wallpaper/ui_layer/no_network_connection_page/no_network_connection_page.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'business_logic_layer/permission_handler/storage_permission.dart';
 
 ///this [darkThemeKeyValue] variable is used for getting the value from the [SharedPreferences]
 ///key called "darkTheme", to manage the App's theme. This [darkThemeKeyValue] variable
@@ -19,6 +22,7 @@ late SharedPreferences sharedPreferences;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  storageStatusCheck = await Permission.storage.status;
   //initializing the late sharedPreferences instance;
   sharedPreferences = await SharedPreferences.getInstance();
 
@@ -51,33 +55,30 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(
-      builder: (context, ref, child) {
-        return MaterialApp(
-            debugShowCheckedModeBanner: false,
+    return Consumer(builder: (context, ref, child) {
+      return MaterialApp(
+          debugShowCheckedModeBanner: false,
 
-            ///if the darkThemeKeyValue is declared in main.dart file if the
-            ///variable is true, then change to darkMode or lightMode
-            ///the darkThemeKeyValue's state is Changing in the AppThemeLogic class
-            theme: ref.watch(switchStateValue) == true
-                ? ThemeData.dark(useMaterial3: true)
-                : ThemeData.light(useMaterial3: true),
+          ///if the darkThemeKeyValue is declared in main.dart file if the
+          ///variable is true, then change to darkMode or lightMode
+          ///the darkThemeKeyValue's state is Changing in the AppThemeLogic class
+          theme: ref.watch(switchStateValue) == true
+              ? ThemeData.dark(useMaterial3: true)
+              : ThemeData.light(useMaterial3: true),
 
-            ///if the Device has network connection, then call the HomePage.
-            ///otherwise  NoNetworkConnection page.
-            ///the getNetworkStream() is declared in the NetWorkState class
-            home: StreamBuilder<bool>(
-              stream: NetworkState().getNetworkStream(),
-              builder: (context, networkState){
-                if(networkState.data == true){
-                  return const HomePage();
-                }else{
-                  return const NoNetworkConnection();
-                }
-              },
-            )
-          );
-      }
-    );
+          ///if the Device has network connection, then call the HomePage.
+          ///otherwise  NoNetworkConnection page.
+          ///the getNetworkStream() is declared in the NetWorkState class
+          home: StreamBuilder<bool>(
+            stream: NetworkState().getNetworkStream(),
+            builder: (context, networkState) {
+              if (networkState.data == true) {
+                return const HomePage();
+              } else {
+                return const NoNetworkConnection();
+              }
+            },
+          ));
+    });
   }
 }

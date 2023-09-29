@@ -1,30 +1,27 @@
 import 'package:permission_handler/permission_handler.dart';
 
-class StoragePermission {
+late PermissionStatus storageStatusCheck;
 
-  bool isStoragePermissionGranted = false;
+class StoragePermission {
+  PermissionStatus storageStatus = storageStatusCheck;
 
   ///this method is for asking the user for Storage Permission
   ///using the [Permission] class
-  Future<bool> getStoragePermission() async {
-
+  Future<void> getStoragePermission() async {
     //await the status for Storage API
-    PermissionStatus storageStatus = await Permission.storage.status;
+    storageStatus = await Permission.storage.status;
 
-    //if it's already Granted then assign true to isStoragePermissionGranted variable
-    if(storageStatus.isGranted){
-      isStoragePermissionGranted = true;
-    }else{
+    if (storageStatus == PermissionStatus.denied) {
       //if it's not Granted ask the Storage Permission to user
-      var status = await Permission.storage.request();
-      if(status.isGranted){
-        isStoragePermissionGranted = true;
-      }else{
-        isStoragePermissionGranted = false;
-      }
+      await Permission.storage.request();
+    } else if (storageStatus == PermissionStatus.permanentlyDenied) {
+      await openSettings();
+    } else {
+      storageStatus = PermissionStatus.granted;
     }
+  }
 
-    //return the result here
-    return isStoragePermissionGranted;
+  Future<bool> openSettings() async {
+    return await openAppSettings();
   }
 }

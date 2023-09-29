@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:free_wallpaper/main.dart';
 import 'package:free_wallpaper/riverpod/state_notifier_providers/image_details/image_list_index.dart';
 import 'package:free_wallpaper/ui_layer/full_screen/full_screen.dart';
 import '../../../riverpod/providers/riverpod_providers.dart';
@@ -26,7 +25,7 @@ class CuratedImages extends ConsumerWidget {
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2),
-                      itemCount: data.data!.length + 1,
+                      itemCount: data.data!.length,
                       itemBuilder: (context, index) {
                         return Container(
                           padding: const EdgeInsets.all(2.0),
@@ -38,9 +37,12 @@ class CuratedImages extends ConsumerWidget {
                               ///class and index from the GridView.builder to the
                               ///changeIndexImageListIndex() method in the
                               ///ImageListIndex class
-                              ref.read(imageProviderToUser.notifier).changeImageDetailsProperties(
-                                  data.data!);
-                              ref.read(imageListIndex.notifier).changeIndexImageListIndex(index);
+                              ref
+                                  .read(imageProviderToUser.notifier)
+                                  .changeImageDetailsProperties(data.data!);
+                              ref
+                                  .read(imageListIndex.notifier)
+                                  .changeIndexImageListIndex(index);
 
                               ///then navigate to the FullScreen Widget
                               Navigator.push(
@@ -58,17 +60,9 @@ class CuratedImages extends ConsumerWidget {
                           ),
                         );
                       });
-                } else if (data.connectionState == ConnectionState.waiting) {
-                  return Center(
-                      child: CircularProgressIndicator(
-                    ///if the device is in darkTheme show the
-                    ///CircularProgressIndicator in white color, otherwise
-                    ///black
-                    color: darkThemeKeyValue ? Colors.white : Colors.black,
-                  ));
                 } else {
                   return const Center(
-                    child: Text("NetWork Issue detected"),
+                    child: CircularProgressIndicator(),
                   );
                 }
               }),

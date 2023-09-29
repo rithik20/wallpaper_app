@@ -1,8 +1,9 @@
 import 'package:free_wallpaper/business_logic_layer/permission_handler/storage_permission.dart';
 import 'package:free_wallpaper/data_layer/download_image/download_image.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../platform_specific_code/toast_widget_service/wallpaper_download_toast/wallpaper_download_toast.dart';
 
-class DownloadImage{
+class DownloadImage {
   ///this [isImageDownloaded] variable holds the state that the image
   ///downloaded or not
   bool isImageDownloaded = false;
@@ -23,8 +24,9 @@ class DownloadImage{
 
   Future<void> downloadTheImage(String url, String name) async {
     ///first ask the Permission only run the remaining tasks if the Permission is Granted
-    bool permissionStatus = await storagePermission.getStoragePermission();
-    if (permissionStatus) {
+    if (storagePermission.storageStatus != PermissionStatus.granted) {
+      await storagePermission.getStoragePermission();
+    } else if (storagePermission.storageStatus == PermissionStatus.granted) {
       try {
         isImageDownloaded =
             await downloadImageToDownloads.imageDownload(url, name);
