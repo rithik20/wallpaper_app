@@ -2,9 +2,9 @@
 
 A Simple Wallpaper App For Android.
 
-Users can Download Wallpapers to Their Downloads Directory
+. Users can Download Wallpapers to Their Downloads Directory
 
-Users can set Wallpaper through the App
+. Users can set Wallpaper through the App
 
 
 # Screenshots
