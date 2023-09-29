@@ -2,8 +2,9 @@
 
 A Simple Wallpaper App For Android.
 
-.Users can Download Wallpapers to Their Downloads Directory
-.Users can set Wallpaper through the App
+#.Users can Download Wallpapers to Their Downloads Directory
+#.Users can set Wallpaper through the App
+
 
 # Screenshots
 ![Screenshot_2023-09-29-08-48-16-904_com example free_wallpaper](https://github.com/rithik20/wallpaper_app/assets/96861390/3ff15b92-6582-4967-98bb-14c0dcb0cbda)
